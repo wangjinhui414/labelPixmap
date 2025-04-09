@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file>LabelPixmap_en.qm</file>
+        <file>LabelPixmap_zh_CN.qm</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>icons/add_point.png</file>
+        <file>icons/close_folder.png</file>
+        <file>icons/copy_rect.png</file>
+        <file>icons/cut.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/delete_item.png</file>
+        <file>icons/export_coco.png</file>
+        <file>icons/export_voc.png</file>
+        <file>icons/export_yolo.png</file>
+        <file>icons/height_decrease.png</file>
+        <file>icons/height_increase.png</file>
+        <file>icons/image_rotate_left.png</file>
+        <file>icons/image_rotate_right.png</file>
+        <file>icons/label_mode.png</file>
+        <file>icons/manage_mode.png</file>
+        <file>icons/move.png</file>
+        <file>icons/next.png</file>
+        <file>icons/open_folder.png</file>
+        <file>icons/paste_rect.png</file>
+        <file>icons/polygon.png</file>
+        <file>icons/previous.png</file>
+        <file>icons/rectangle.png</file>
+        <file>icons/rename.png</file>
+        <file>icons/rotate_left.png</file>
+        <file>icons/rotate_right.png</file>
+        <file>icons/save.png</file>
+        <file>icons/select_class.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/width_decrease.png</file>
+        <file>icons/width_increase.png</file>
+        <file>icons/zoom_in.png</file>
+        <file>icons/zoom_out.png</file>
+        <file>icons/copy.png</file>
+        <file>icons/rotate_left_small.png</file>
+        <file>icons/rotate_right_small.png</file>
+        <file>icons/exit.png</file>
+        <file>styles/dark.qss</file>
+        <file>icons/mkdir.png</file>
+    </qresource>
+</RCC>

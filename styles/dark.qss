@@ -1,0 +1,130 @@
+/* 全局背景和字体 */
+QWidget {
+    background-color: #2d2d2d;  /* 主背景色 */
+    color: #e0e0e0;            /* 默认字体颜色 */
+    font-family: "Segoe UI", "Microsoft YaHei";
+    selection-background-color: #3a3a3a;  /* 选中项背景 */
+    selection-color: white;               /* 选中项文字 */
+}
+
+/* 按钮样式 */
+QPushButton {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+QPushButton:hover {
+    background-color: #4a4a4a;
+}
+QPushButton:pressed {
+    background-color: #2a2a2a;
+}
+
+/* 文本框/输入框 */
+QLineEdit, QTextEdit, QPlainTextEdit {
+    background-color: #252525;
+    border: 1px solid #444;
+    border-radius: 3px;
+    padding: 3px;
+}
+QLineEdit:focus, QTextEdit:focus {
+    border: 1px solid #0078d7;  /* 聚焦时蓝色边框 */
+}
+
+/* 下拉框 */
+QComboBox {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    padding: 3px;
+}
+QComboBox QAbstractItemView {
+    background-color: #3a3a3a;  /* 下拉菜单背景 */
+    color: #e0e0e0;
+}
+
+/* 滚动条 */
+QScrollBar:vertical {
+    background: #252525;
+    width: 12px;
+}
+QScrollBar::handle:vertical {
+    background: #4a4a4a;
+    min-height: 20px;
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    background: none;
+}
+
+/* 菜单栏 */
+QMenuBar {
+    background-color: #2d2d2d;
+}
+QMenuBar::item {
+    padding: 5px 10px;
+}
+QMenuBar::item:selected {
+    background-color: #3a3a3a;
+}
+QMenu {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+}
+QMenu::item:selected {
+    background-color: #0078d7;  /* 菜单选中项高亮 */
+}
+
+/* 标签 */
+QLabel {
+    color: #e0e0e0;
+}
+QLabel[important="true"] {  /* 自定义属性示例 */
+    color: #ff5555;
+}
+
+/* 进度条 */
+QProgressBar {
+    text-align: center;
+    border: 1px solid #444;
+    background-color: #252525;
+}
+QProgressBar::chunk {
+    background-color: #0078d7;  /* 进度条填充色 */
+}
+
+/* 复选框/单选框 */
+QCheckBox, QRadioButton {
+    spacing: 5px;
+}
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+
+
+QTreeView {
+    background-color: #252525;
+    color: #FFFFFF;
+    border: 1px solid #444;
+}
+QHeaderView {
+    background-color: #2d2d2d;
+    border: none;
+}
+QHeaderView::section {
+    background-color: #2d2d2d;
+    color: #FFFFFF;
+    padding: 0px;          /* 减少内边距 */
+    border: 1px solid #444;
+    margin: 0;
+    min-height: 20px;      /* 最小高度 */
+    max-height: 20px;      /* 最大高度 */
+    font-size: 12px;       /* 可选：调小字体 */
+}
+QHeaderView::section:hover {
+    background-color: #3a3a3a;
+}
+QLabel{
+    font-size: 14px;
+}
