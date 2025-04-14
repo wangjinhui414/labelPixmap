@@ -4,6 +4,9 @@
 #include <QInputDialog>
 #include <QLabel>
 #include <QFrame>
+#include <QSettings>
+#include <QColor>
+#include <QVector>
 
 
 #define SETTING_FILE_NAME "setting.cfg"
@@ -55,6 +58,10 @@ TYPE_GOLBAL_DATA::TYPE_GOLBAL_DATA()
         QColor(0, 64, 128),
         QColor(128, 64, 12)
     };
+    classIshow.resize(classColors.size());
+    for(int i=0;i!=classColors.size();i++)
+        classIshow[i] = true;
+
     lineWidth = 4;
     fontColor = Qt::green;
     alpha = 60;
@@ -70,9 +77,7 @@ TYPE_GOLBAL_DATA::~TYPE_GOLBAL_DATA()
 }
 
 
-#include <QSettings>
-#include <QColor>
-#include <QVector>
+
 
 void TYPE_GOLBAL_DATA::readSettingIni() {
     QSettings settings(SETTING_FILE_NAME, QSettings::IniFormat);
@@ -91,19 +96,23 @@ void TYPE_GOLBAL_DATA::readSettingIni() {
     // 清空现有数据
     classNames.clear();
     classColors.clear();
+    classIshow.clear();
 
     // 读取类别数量和类别数据
     int classCount = settings.value("Classes/count", 0).toInt();
     for (int i = 0; i < classCount; ++i) {
         QString nameKey = QString("Classes/name_%1").arg(i);
         QString colorKey = QString("Classes/color_%1").arg(i);
+        QString isShowKey = QString("Classes/isShow_%1").arg(i);
 
         QString name = settings.value(nameKey, "").toString();
         QColor color = QColor(settings.value(colorKey, "#000000").toString());
+        bool isShow = settings.value(isShowKey).toBool();
 
         if (!name.isEmpty()) {
             classNames.append(name);
             classColors.append(color);
+            classIshow.append(isShow);
         }
     }
 
@@ -111,6 +120,7 @@ void TYPE_GOLBAL_DATA::readSettingIni() {
     if (classNames.isEmpty()) {
         classNames.append("Default");
         classColors.append(Qt::red);
+        classIshow.append(true);
     }
 
     // 确保当前索引有效
@@ -141,9 +151,12 @@ void TYPE_GOLBAL_DATA::writeSettingIni() {
     for (int i = 0; i < classNames.size(); ++i) {
         QString nameKey = QString("Classes/name_%1").arg(i);
         QString colorKey = QString("Classes/color_%1").arg(i);
+        QString isShowKey = QString("Classes/isShow_%1").arg(i);
 
         settings.setValue(nameKey, classNames[i]);
         settings.setValue(colorKey, classColors[i].name());
+        //qDebug()<<classIshow[i];
+        settings.setValue(isShowKey, classIshow[i]);
     }
 
     settings.setValue("normal/workPath", workPath);
@@ -305,6 +318,8 @@ void GlobalSettingsDialog::updateUiFromData()
     m_classModel->clear();
     for (int i = 0; i < m_globalData.classNames.size(); ++i) {
         QStandardItem *item = new QStandardItem(m_globalData.classNames[i]);
+        item->setCheckable(true);  // 自动设置 Qt::CheckStateRole
+        item->setCheckState(m_globalData.classIshow[i]?Qt::Checked:Qt::Unchecked); // 初始状态：未选中
         item->setData(m_globalData.classColors[i], Qt::DecorationRole);
         item->setEditable(true);
         m_classModel->appendRow(item);
@@ -328,11 +343,13 @@ void GlobalSettingsDialog::updateDataFromUi()
     // 更新类别数据
     m_globalData.classNames.clear();
     m_globalData.classColors.clear();
+    m_globalData.classIshow.clear();
 
     for (int i = 0; i < m_classModel->rowCount(); ++i) {
         QStandardItem *item = m_classModel->item(i);
         m_globalData.classNames.append(item->text());
         m_globalData.classColors.append(item->data(Qt::DecorationRole).value<QColor>());
+        m_globalData.classIshow.append(item->checkState());
     }
 
     // 更新当前选中索引
@@ -356,6 +373,9 @@ void GlobalSettingsDialog::onAddClass()
 
     if (ok && !className.isEmpty()) {
         QStandardItem *item = new QStandardItem(className);
+        // 启用复选框
+        item->setCheckable(true);  // 自动设置 Qt::CheckStateRole
+        item->setCheckState(Qt::Checked); // 初始状态：未选中
         item->setData(QColor(Qt::red), Qt::DecorationRole); // 默认红色
         item->setEditable(true);
         m_classModel->appendRow(item);

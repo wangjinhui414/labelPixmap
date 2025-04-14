@@ -235,6 +235,8 @@ void LQGraphicsScene::rect_ItemClassChange(LQGraphicsRectItem *rectItem,bool fla
     //边框颜色
     rectItem->setData(Qt::UserRole+8,golbalState.curCsIndex());
     rectItem->setPen(QPen(golbalState.fontColor, golbalState.lineWidth));
+    if(!golbalState.classIshow[golbalState.curCsIndex()]) rectItem->setVisible(false);
+    else rectItem->setVisible(true);
     //蒙版颜色
     QColor color = golbalState.curCsColor();
     color.setAlpha(golbalState.alpha);
@@ -521,12 +523,14 @@ void LQGraphicsScene::polygon_ItemClassChange(LQGraphicsPathItem *pathItem, bool
 {
     if(flag)
     {
-        QString typestr = showDialogAtMousePos(); //QInputDialog::getItem(nullptr,"类别选择","请选择标注类别！",golbalState.classNames.toList(),golbalState.curCsIndex(),false);
+        QString typestr = showDialogAtMousePos();
         golbalState.curIndex = golbalState.classNames.indexOf(typestr);
     }
     //边框颜色
     pathItem->setData(Qt::UserRole+8,golbalState.curCsIndex());
     pathItem->setPen(QPen(golbalState.fontColor, golbalState.lineWidth));
+    if(!golbalState.classIshow[golbalState.curCsIndex()]) pathItem->setVisible(false);
+    else pathItem->setVisible(true);
     //蒙版颜色
     QColor color = golbalState.curCsColor();
     color.setAlpha(golbalState.alpha);

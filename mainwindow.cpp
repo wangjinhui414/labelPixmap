@@ -192,7 +192,7 @@ void MainWindow::createWidges()
     });
     QIcon appIcon(":/images/iPhotoDraw.ico");  // 图标路径，资源文件路径
     setWindowIcon(appIcon);
-    setWindowTitle(tr("图片标注软件V1.05"));
+    setWindowTitle(tr("图片标注软件V1.06"));
     showMaximized();
 }
 
@@ -1502,6 +1502,30 @@ void MainWindow::slot_act_setting()
     if (dialog.exec() == QDialog::Accepted) {
         // 用户点击确定，数据已自动保存
         qDebug() << "当前类别:" << golbalState.curCsName();
+
+        QList<QGraphicsItem *> sitems = m_sence->items();
+        for(int i=0;i!=sitems.size();i++)
+        {
+            if(sitems[i]->type() ==LQGraphicsRectItem::Type || sitems[i]->type() ==LQGraphicsPathItem ::Type)
+            {
+                // LQGraphicsRectItem *rectItem = static_cast<LQGraphicsRectItem*>(sitems[i]);
+                // QRectF rectf = rectItem->rect();
+                // rectItem->setRect_LQ(
+                //     QRectF(rectf.x(),rectf.y(),rectf.width()+var,rectf.height())
+                //     );
+                int clstype = sitems[i]->data(Qt::UserRole+8).toInt();
+                if(!golbalState.classIshow[clstype])
+                {
+                    qDebug()<<clstype;
+                    sitems[i]->setVisible(false);
+                }
+                else{
+                    sitems[i]->setVisible(true);
+                }
+            }
+
+        }
+
     } else {
         // 用户取消，数据未修改
     }

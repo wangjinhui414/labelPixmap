@@ -35,6 +35,7 @@ public:
     int labelMode;//标注模式
     QVector<QString> classNames;//类别名字
     QVector<QColor> classColors;//类别颜色
+    QVector<bool> classIshow;//类别是否显示
     int curIndex;//当前类别
     int lineWidth;//线宽
     QColor fontColor;//字体颜色
